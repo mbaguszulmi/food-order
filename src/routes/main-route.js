@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 //pages
 import Checkout from './pages/checkout';
-import NotFoundPage from './pages/404';
+import NotFoundPage from './pages/not-found-page';
 import FoodList from './pages/food-list';
 import AddFood from './pages/add-food';
 import AddPromo from './pages/add-promo';
