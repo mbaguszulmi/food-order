@@ -9,12 +9,14 @@ import './assets/css/style.css';
 import { Provider } from 'react-redux'
 import configureStore from './store';
 
+const store = configureStore();
+
 ReactDOM.render(
-    <HashRouter>
-        <Provider store={configureStore}>
+    <Provider store={store}>
+        <HashRouter>
             <App />
-        </Provider>
-    </HashRouter>,
+        </HashRouter>
+    </Provider>,
     document.getElementById('root')
 );
 
