@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { HashRouter } from "react-router-dom";
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
+import './assets/css/style.css'
 
 ReactDOM.render(
     <HashRouter>

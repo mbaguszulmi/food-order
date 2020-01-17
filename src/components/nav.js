@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Layout, Header, Drawer, Navigation} from "react-mdl";
+import { Header, Drawer, Navigation} from "react-mdl";
 
 class Nav extends Component {
     render() {
         return(
-            <Layout fixedHeader>
+            <div>
                 <Header title="Food Order">
                     <Navigation>
                         <Link to="/">Home</Link>
@@ -24,7 +24,7 @@ class Nav extends Component {
                         <Link to="/promo-list">Promo List</Link>
                     </Navigation>
                 </Drawer>
-            </Layout>
+            </div>
         );
     }
 }

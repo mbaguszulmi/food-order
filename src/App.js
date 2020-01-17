@@ -1,16 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import Nav from './components/nav'
-import { Content } from "react-mdl";
+import { Layout, Content } from "react-mdl";
 import MainRoute from "./routes/main-route";
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <Content>
-        <MainRoute />
-      </Content>
+      <Layout>
+        <Nav />
+        <Content>
+          <MainRoute />
+        </Content>
+      </Layout>
     </div>
   );
 }
