@@ -2,12 +2,12 @@ import React from 'react';
 import { Switch, Route } from "react-router-dom";
 
 //pages
-import Checkout from './pages/checkout';
-import NotFoundPage from './pages/not-found-page';
-import FoodList from './pages/food-list';
-import AddFood from './pages/add-food';
-import AddPromo from './pages/add-promo';
-import PromoList from './pages/promo-list';
+import Checkout from '../pages/checkout';
+import NotFoundPage from '../pages/not-found-page';
+import FoodList from '../pages/food-list';
+import AddFood from '../pages/add-food';
+import AddPromo from '../pages/add-promo';
+import PromoList from '../pages/promo-list';
 
 const MainRoute = () => {
     return(
