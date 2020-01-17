@@ -5,11 +5,15 @@ import * as serviceWorker from './serviceWorker';
 import { HashRouter } from "react-router-dom";
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
-import './assets/css/style.css'
+import './assets/css/style.css';
+import { Provider } from 'react-redux'
+import configureStore from './store';
 
 ReactDOM.render(
     <HashRouter>
-        <App />
+        <Provider store={configureStore}>
+            <App />
+        </Provider>
     </HashRouter>,
     document.getElementById('root')
 );

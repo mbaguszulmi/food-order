@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Nav from './components/nav'
 import { Layout, Content } from "react-mdl";
 import MainRoute from "./routes/main-route";
+import { connect } from 'react-redux';
+import { addFood } from './actions/addFood'
+
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+  addFood: () => dispatch(addFood())
+})
 
 class App extends Component {
   render() {
@@ -12,6 +21,9 @@ class App extends Component {
           <Nav />
           <Content>
             <MainRoute />
+            <pre>
+              {this.props}
+            </pre>
           </Content>
         </Layout>
       </div>
@@ -19,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
