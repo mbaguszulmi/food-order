@@ -13,10 +13,10 @@ const MainRoute = () => {
     return(
         <Switch>
             <Route exact path="/" component={FoodList} />
+            <Route path="/checkout" component={Checkout} />
             <Route path="/add-food" component={AddFood} />
             <Route path="/add-promo" component={AddPromo} />
             <Route path="/promo-list" component={PromoList} />
-            <Route path="/checkout" component={Checkout} />
             <Route path="*" component={NotFoundPage} />
         </Switch>
     );
