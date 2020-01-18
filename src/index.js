@@ -5,12 +5,18 @@ import * as serviceWorker from './serviceWorker';
 import { HashRouter } from "react-router-dom";
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
-import './assets/css/style.css'
+import './assets/css/style.css';
+import { Provider } from 'react-redux'
+import configureStore from './store';
+
+const store = configureStore();
 
 ReactDOM.render(
-    <HashRouter>
-        <App />
-    </HashRouter>,
+    <Provider store={store}>
+        <HashRouter>
+            <App />
+        </HashRouter>
+    </Provider>,
     document.getElementById('root')
 );
 
