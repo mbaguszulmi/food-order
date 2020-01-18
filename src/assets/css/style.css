@@ -1,0 +1,11 @@
+body div.mdl-layout__content {
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+}
+
+body div.mdl-layout__content div.inner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=style.css.map */
