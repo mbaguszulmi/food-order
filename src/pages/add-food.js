@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Textfield, Button, Snackbar } from "react-mdl";
 import { connect } from 'react-redux';
 import { addFood } from '../actions/addFood';
-import { Redirect } from 'react-router-dom';
 
 const mapStateToProps = state => ({
     ...state
