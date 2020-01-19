@@ -2,7 +2,7 @@ export default (state = {}, action) => {
     switch (action.type) {
         case 'ADD_CHECKOUT_FOOD':
             state = { ...state };
-            state.foodList.push(action.data);
+            state.foodList[action.data.foodName] = action.data.quantity;
 
             return state;
 
