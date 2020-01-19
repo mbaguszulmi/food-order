@@ -7,18 +7,11 @@ const mapStateToProps = state => ({
 })
 
 class Checkout extends Component {
-    state={
-        foodList: {
-            PIZZA: {
-                foodName: "Pizza",
-                price: 10000
-            },
-            BURGER: {
-                foodName: "Burger",
-                price: 10000
-            }
-        },
-        foodOptions: []
+    constructor(props) {
+        super(props);
+
+        this.foodList = {};
+        this.foodOptions = [];
     }
 
     componentDidMount() {
@@ -28,46 +21,43 @@ class Checkout extends Component {
             <tfoot>
                 <tr>
                     <th colspan="3">Total Price</th>
-                    <td>10000</td>
+                    <td id="total-price-value">0</td>
                 </tr>
 
                 <tr>
                     <th colspan="3">Discount</th>
-                    <td>-10000</td>
+                    <td id="discount-value">0</td>
                 </tr>
 
                 <tr>
                     <th colspan="3">Delivery Fee</th>
-                    <td>3000</td>
+                    <td id="delivery-fee-value">0</td>
                 </tr>
 
                 <tr>
                     <th colspan="3">Total</th>
-                    <td>3000</td>
+                    <td id="total-value">0</td>
                 </tr>
             </tfoot>
         `;
 
         document.querySelector("#checkout-table").insertAdjacentHTML("beforeend", html);
 
-        let foodOptions = [];
-        for (const key in this.state.foodList) {
-            if (this.state.foodList.hasOwnProperty(key)) {
-                const food = this.state.foodList[key];
+        for (const key in this.foodList) {
+            if (this.foodList.hasOwnProperty(key)) {
+                const food = this.foodList[key];
                 
-                foodOptions.push(
+                this.foodOptionsfoodOptions.push(
                     <option key={key} value={food.foodName} />
                 )
             }
         }
-
-        this.setState({foodOptions: foodOptions});
     }
 
     render() {
         return(
             <div>
-                <h1>Check Out</h1>
+            <h1>Check Out</h1>
 
                 <div className="add-food-form">
                     <Textfield
@@ -79,7 +69,7 @@ class Checkout extends Component {
                     />
 
                     <datalist id="food-list">
-                        {this.state.foodOptions}
+                        {this.foodOptions}
                     </datalist>
 
                     <Textfield
