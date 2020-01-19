@@ -7,13 +7,6 @@ const mapStateToProps = state => ({
 })
 
 class Checkout extends Component {
-    constructor(props) {
-        super(props);
-
-        this.foodList = {};
-        this.foodOptions = [];
-    }
-
     componentDidMount() {
         document.title = "Check Out";
 
@@ -26,7 +19,11 @@ class Checkout extends Component {
 
                 <tr>
                     <th colspan="3">Discount</th>
-                    <td id="discount-value">0</td>
+                    <td id="discount-value" rowspan="2">0</td>
+                </tr>
+
+                <tr>
+                    <td id="promo-value" colspan="3">-</td>
                 </tr>
 
                 <tr>
@@ -42,16 +39,6 @@ class Checkout extends Component {
         `;
 
         document.querySelector("#checkout-table").insertAdjacentHTML("beforeend", html);
-
-        for (const key in this.foodList) {
-            if (this.foodList.hasOwnProperty(key)) {
-                const food = this.foodList[key];
-                
-                this.foodOptionsfoodOptions.push(
-                    <option key={key} value={food.foodName} />
-                )
-            }
-        }
     }
 
     render() {
@@ -69,7 +56,7 @@ class Checkout extends Component {
                     />
 
                     <datalist id="food-list">
-                        {this.foodOptions}
+                        {Object.keys(this.props.foods).map((key) => <option key={key} value={this.props.foods[key].foodName} />)}
                     </datalist>
 
                     <Textfield
