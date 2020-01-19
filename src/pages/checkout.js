@@ -9,6 +9,11 @@ const mapStateToProps = state => ({
 class Checkout extends Component {
     componentDidMount() {
         document.title = "Check Out";
+
+        document.querySelector("#textfield-FoodName").addEventListener("input", event => {
+            let foodNameInput = event.target;
+            foodNameInput.value = foodNameInput.value.toUpperCase();
+        });
     }
 
     render() {
