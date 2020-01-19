@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Textfield, Button } from "react-mdl";
+import { Textfield, Button, Snackbar } from "react-mdl";
 import { connect } from 'react-redux';
 import { addCheckoutFood } from "../actions/checkoutActions";
 
@@ -12,6 +12,15 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class Checkout extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showAddFoodSnackbar: false,
+            addFoodMessage: null
+        }
+    }
+
     componentDidMount() {
         document.title = "Check Out";
 
@@ -20,26 +29,38 @@ class Checkout extends Component {
             foodNameInput.value = foodNameInput.value.toUpperCase();
         });
 
-        document.querySelector("#add-btn").addEventListener("click", () => {
+        document.querySelector("#add-food-btn").addEventListener("click", () => {
             let foodName = document.querySelector("#textfield-FoodName").value;
-            let price = document.querySelector("#textfield-Price").value;
+            let quantity = document.querySelector("#textfield-Quantity").value;
             
-            if (foodName.trim() !== "" && price.trim()!== "" && !isNaN(price.trim())) {
-                this.props.addFood({
-                    foodId: foodName,
-                    foodData: {
+            if (foodName.trim() !== "" && quantity.trim()!== "" && !isNaN(quantity.trim())) {
+                if (this.props.foods.hasOwnProperty(foodName)) {
+                    this.props.addCheckoutFood({
                         foodName: foodName,
-                        price: price
-                    }
-                });
+                        quantity: quantity
+                    });
 
-                document.querySelector("#textfield-FoodName").value = '';
-                document.querySelector("#textfield-Price").value = '';
-
-                this.setState({
-                    isAddFoodSucceed: true
-                });
+                    document.querySelector("#textfield-FoodName").value = '';
+                    document.querySelector("#textfield-Quantity").value = '';
+    
+                    this.setState({
+                        showAddFoodSnackbar: true,
+                        message: `Food ${foodName} added to checkout list`
+                    });
+                }
+                else {
+                    this.setState({
+                        showAddFoodSnackbar: true,
+                        message: `Food ${foodName} not found`
+                    });
+                }
             }
+        });
+    }
+
+    disableAddFoodSnackbar() {
+        this.setState({
+            isAddFoodSucceed: false
         });
     }
 
@@ -147,6 +168,10 @@ class Checkout extends Component {
                         </tfoot>
                     </table>
                 </div>
+
+                <Snackbar
+                    active={this.state.showAddFoodSnackbar}
+                    onTimeout={() => this.disableAddFoodSnackbar()}>Add food succeeded</Snackbar>
             </div>
         );
     }
