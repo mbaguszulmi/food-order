@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Textfield, Button, DataTable, TableHeader } from "react-mdl";
+import { Textfield, Button } from "react-mdl";
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
@@ -9,36 +9,6 @@ const mapStateToProps = state => ({
 class Checkout extends Component {
     componentDidMount() {
         document.title = "Check Out";
-
-        let html = `
-            <tfoot>
-                <tr>
-                    <th colspan="3">Total Price</th>
-                    <td id="total-price-value">0</td>
-                </tr>
-
-                <tr>
-                    <th colspan="3">Discount</th>
-                    <td id="discount-value" rowspan="2">0</td>
-                </tr>
-
-                <tr>
-                    <td id="promo-value" colspan="3">-</td>
-                </tr>
-
-                <tr>
-                    <th colspan="3">Delivery Fee</th>
-                    <td id="delivery-fee-value">0</td>
-                </tr>
-
-                <tr>
-                    <th colspan="3">Total</th>
-                    <td id="total-value">0</td>
-                </tr>
-            </tfoot>
-        `;
-
-        document.querySelector("#checkout-table").insertAdjacentHTML("beforeend", html);
     }
 
     render() {
@@ -94,7 +64,7 @@ class Checkout extends Component {
                 </div>
 
                 <div className="table-container">
-                    <DataTable
+                    {/* <DataTable
                         id="checkout-table"
                         shadow={0}
                         rows={[]}
@@ -103,7 +73,47 @@ class Checkout extends Component {
                         <TableHeader numeric name="price" tooltip="Price in Rp">Price (Rp)</TableHeader>
                         <TableHeader numeric name="quantity" tooltip="Quantity">Quantity</TableHeader>
                         <TableHeader numeric name="subTotal" tooltip="Sub Total in Rp">Sub Total (Rp)</TableHeader>
-                    </DataTable>
+                    </DataTable> */}
+
+                    <table class="mdl-data-table mdl-js-data-table">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Food Name</th>
+                                <th>Price (Rp)</th>
+                                <th>Quantity</th>
+                                <th>Sub Total (Rp)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                                <td>250</td>
+                                <td>1</td>
+                                <td>250</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3">Total Price</th>
+                                <td id="total-price-value">0</td>
+                            </tr>
+
+                            <tr>
+                                <th colspan="3">Discount <span id="promo-value"></span></th>
+                                <td id="discount-value">0</td>
+                            </tr>
+
+                            <tr>
+                                <th colspan="3">Delivery Fee</th>
+                                <td id="delivery-fee-value">0</td>
+                            </tr>
+
+                            <tr>
+                                <th colspan="3">Total</th>
+                                <td id="total-value">0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         );
