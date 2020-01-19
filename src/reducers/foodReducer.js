@@ -1,8 +1,8 @@
 export default (state = [], action) => {
     switch (action.type) {
         case 'ADD_FOOD':
-            state = state.slice();
-            state.push(action.data);
+            state = {...state}
+            state[action.data.foodId] = {...action.data.foodData}
 
             return state;
         default:
