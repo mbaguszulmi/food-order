@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Textfield, Button, DataTable, TableHeader } from "react-mdl";
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+    ...state
+})
 
 class Checkout extends Component {
     state={
@@ -128,4 +133,4 @@ class Checkout extends Component {
     }
 }
 
-export default Checkout;
+export default connect(mapStateToProps)(Checkout);
