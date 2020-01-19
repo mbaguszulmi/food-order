@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Textfield, Button } from "react-mdl";
 import { connect } from 'react-redux';
+import { addCheckoutFood } from "../actions/checkoutActions";
 
 const mapStateToProps = state => ({
     ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+    addCheckoutFood: (checkoutFoodData) => dispatch(addCheckoutFood(checkoutFoodData))
 })
 
 class Checkout extends Component {
@@ -13,6 +18,28 @@ class Checkout extends Component {
         document.querySelector("#textfield-FoodName").addEventListener("input", event => {
             let foodNameInput = event.target;
             foodNameInput.value = foodNameInput.value.toUpperCase();
+        });
+
+        document.querySelector("#add-btn").addEventListener("click", () => {
+            let foodName = document.querySelector("#textfield-FoodName").value;
+            let price = document.querySelector("#textfield-Price").value;
+            
+            if (foodName.trim() !== "" && price.trim()!== "" && !isNaN(price.trim())) {
+                this.props.addFood({
+                    foodId: foodName,
+                    foodData: {
+                        foodName: foodName,
+                        price: price
+                    }
+                });
+
+                document.querySelector("#textfield-FoodName").value = '';
+                document.querySelector("#textfield-Price").value = '';
+
+                this.setState({
+                    isAddFoodSucceed: true
+                });
+            }
         });
     }
 
@@ -125,4 +152,4 @@ class Checkout extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
