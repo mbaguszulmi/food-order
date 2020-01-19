@@ -30,16 +30,14 @@ class FoodList extends Component {
         return(
             <div>
                 <h1>Food List</h1>
-                foodList: {}
                 <div className="table-container">
-                <DataTable
-                    shadow={0}
-                    rows={this.state.foodList}
-                >
-                    <TableHeader name="foodName" tooltip="Food Name">Food Name</TableHeader>
-                    <TableHeader numeric name="price" tooltip="Price">Price (Rp)</TableHeader>
-                </DataTable>
-
+                    <DataTable
+                        shadow={0}
+                        rows={this.state.foodList}
+                    >
+                        <TableHeader name="foodName" tooltip="Food Name">Food Name</TableHeader>
+                        <TableHeader numeric name="price" tooltip="Price">Price (Rp)</TableHeader>
+                    </DataTable>
                 </div>
             </div>
         );
