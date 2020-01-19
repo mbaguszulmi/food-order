@@ -1,8 +1,8 @@
 export default (state = [], action) => {
     switch (action.type) {
-        case 'ADD_FOOD':
-            state = {...state}
-            state[action.data.foodId] = {...action.data.foodData}
+        case 'ADD_PROMO':
+            state = {...state};
+            state[action.data.promoCode] = {...action.data.promoData}
 
             return state;
         default:

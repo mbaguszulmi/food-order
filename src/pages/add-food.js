@@ -17,14 +17,22 @@ class AddFood extends Component {
     componentDidMount() {
         document.title = "Add Food";
 
+        document.querySelector("#textfield-FoodName").addEventListener("input", event => {
+            let foodNameInput = event.target;
+            foodNameInput.value = foodNameInput.value.toUpperCase();
+        });
+
         document.querySelector("#add-btn").addEventListener("click", () => {
             let foodName = document.querySelector("#textfield-FoodName").value;
             let price = document.querySelector("#textfield-Price").value;
             
             if (foodName.trim() !== "" && price.trim()!== "" && !isNaN(price.trim())) {
                 this.props.addFood({
-                    foodName: foodName,
-                    price: price
+                    foodId: foodName,
+                    foodData: {
+                        foodName: foodName,
+                        price: price
+                    }
                 });
 
                 document.querySelector("#textfield-FoodName").value = '';
