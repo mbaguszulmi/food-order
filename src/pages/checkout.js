@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Textfield, Button, Snackbar } from "react-mdl";
 import { connect } from 'react-redux';
-import { addCheckoutFood, addCheckoutPromo } from "../actions/checkoutActions";
+import { addCheckoutFood, addCheckoutPromo, setDeliveryFee } from "../actions/checkoutActions";
 
 const mapStateToProps = state => ({
     ...state
@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addCheckoutFood: (checkoutFoodData) => dispatch(addCheckoutFood(checkoutFoodData)),
-    addCheckoutPromo: (checkoutPromoData) => dispatch(addCheckoutPromo(checkoutPromoData))
+    addCheckoutPromo: (checkoutPromoData) => dispatch(addCheckoutPromo(checkoutPromoData)),
+    setDeliveryFee: (deliveryFee) => dispatch(setDeliveryFee(deliveryFee))
 })
 
 class Checkout extends Component {
@@ -76,11 +77,22 @@ class Checkout extends Component {
                     });
                 }
                 else {
+                    this.props.addCheckoutPromo(null);
+
                     this.setState({
                         showCheckOutSnackbar: true,
-                        snackbarMessage: `Promo Code "${promoCode}" not found`
+                        snackbarMessage: `Promo Code "${promoCode}" not found. Promo not applied`
                     });
                 }
+            }
+        });
+
+        document.querySelector("#textfield-DeliveryFee").addEventListener("input", event => {
+            let deliveryFee = event.target.value.trim()
+            if (deliveryFee !== "" && !isNaN(deliveryFee)) {
+                deliveryFee = parseInt(deliveryFee);
+
+                this.props.setDeliveryFee(deliveryFee);
             }
         });
     }
@@ -108,11 +120,19 @@ class Checkout extends Component {
                 discount = this.props.promo[this.props.checkout.promoCode].maximum;
             }
 
-            return discount;
+            return -discount;
         }
         else {
             return 0;
         }
+    }
+
+    getDeliveryFee() {
+        return this.props.checkout.deliveryFee || 0;
+    }
+
+    getTotal() {
+        return this.getTotalPrice(this.props.checkout.foodList) + this.getDiscount(this.props.checkout.foodList) + this.getDeliveryFee();
     }
 
     render() {
@@ -219,12 +239,12 @@ class Checkout extends Component {
 
                             <tr>
                                 <th colspan="3">Delivery Fee</th>
-                                <td id="delivery-fee-value">0</td>
+                                <td id="delivery-fee-value">{this.getDeliveryFee()}</td>
                             </tr>
 
                             <tr>
                                 <th colspan="3">Total</th>
-                                <td id="total-value">0</td>
+                                <td id="total-value">{this.getTotal()}</td>
                             </tr>
                         </tfoot>
                     </table>
