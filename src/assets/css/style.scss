@@ -1,11 +1,23 @@
+@mixin for-phone-only {
+    @media (max-width: 699px) { @content; }
+}
+
 body {
+    nav.mdl-navigation {
+        @include for-phone-only {
+            display: none;
+        }
+    }
+
     div.mdl-layout__content {
-        margin: 0 auto;
+        padding-top: 70px;
         width: 100%;
 
         div.inner-content {
             max-width: 1200px;
+            padding: 20px;
             margin: 0 auto;
         }
+
     }
 }
