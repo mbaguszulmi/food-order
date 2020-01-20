@@ -1,11 +1,17 @@
+@media (max-width: 699px) {
+  body nav.mdl-navigation {
+    display: none;
+  }
+}
+
 body div.mdl-layout__content {
-  margin: 0 auto;
+  padding-top: 70px;
   width: 100%;
-  padding: 20px;
 }
 
 body div.mdl-layout__content div.inner-content {
   max-width: 1200px;
+  padding: 20px;
   margin: 0 auto;
 }
 /*# sourceMappingURL=style.css.map */
