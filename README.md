@@ -2,12 +2,19 @@
 Dibuat untuk keperluan test online DOT Indonesia.
 
 ## Catatan
-Project masih berjalan 60% (Masih menambah dan menampilkan daftar makanan) karena mempelajari Redux dan aplikasinya untuk React. Redux sudah terinstall dan sudah di-setup sehingga sudah dapat digunakan.
+Project telah selesai dan siap digunakan. Sebelumnya hari Jumat (17/01/2020) ada beberapa fitur yang belum
+diimplementasikan dikarenakan saya masih mempelajari berbagai macam hal di dalam library redux. Tetapi project telah selesai dan dapat digunakan.
 
-### Task yang belum dilakukan
-1. Menambah daftar kode promo
-2. Melihat daftar kode promo
-3. Melakukan Checkout makanan dan aplikasi kode promo
+### Task
+1. Menambah daftar makanan (halaman Add Food)
+2. Melihat daftar makanan (halaman Home)
+3. Menambah Promo (halaman Add Promo)
+4. Melihat daftar promo (halaman Promo List)
+5. Melakukan Checkout (halaman checkout)
+
+### Task yang akan dilakukan
+1. Menjadikan responsive
+2. Menambah elemen footer
 
 ## Install
 1. Install nodejs / yarn
