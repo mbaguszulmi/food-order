@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Textfield, Button, Snackbar } from "react-mdl";
 import { connect } from 'react-redux';
-import { addCheckoutFood } from "../actions/checkoutActions";
+import { addCheckoutFood, addCheckoutPromo } from "../actions/checkoutActions";
 
 const mapStateToProps = state => ({
     ...state
 })
 
 const mapDispatchToProps = dispatch => ({
-    addCheckoutFood: (checkoutFoodData) => dispatch(addCheckoutFood(checkoutFoodData))
+    addCheckoutFood: (checkoutFoodData) => dispatch(addCheckoutFood(checkoutFoodData)),
+    addCheckoutPromo: (checkoutPromoData) => dispatch(addCheckoutPromo(checkoutPromoData))
 })
 
 class Checkout extends Component {
@@ -16,8 +17,8 @@ class Checkout extends Component {
         super(props);
 
         this.state = {
-            showAddFoodSnackbar: false,
-            addFoodMessage: null
+            showCheckOutSnackbar: false,
+            snackbarMessage: null
         }
     }
 
@@ -44,14 +45,37 @@ class Checkout extends Component {
                     document.querySelector("#textfield-Quantity").value = '';
     
                     this.setState({
-                        showAddFoodSnackbar: true,
-                        message: `Food ${foodName} added to checkout list`
+                        showCheckOutSnackbar: true,
+                        snackbarMessage: `Food ${foodName} added to checkout list`
                     });
                 }
                 else {
                     this.setState({
-                        showAddFoodSnackbar: true,
-                        message: `Food ${foodName} not found`
+                        showCheckOutSnackbar: true,
+                        snackbarMessage: `Food ${foodName} not found`
+                    });
+                }
+            }
+        });
+
+        document.querySelector("#apply-promo-btn").addEventListener("click", () => {
+            let promoCode = document.querySelector("#textfield-PromoCode").value;
+            
+            if (promoCode.trim() !== "") {
+                if (this.props.promo.hasOwnProperty(promoCode)) {
+                    this.props.addCheckoutPromo(promoCode);
+
+                    document.querySelector("#textfield-PromoCode").value = '';
+    
+                    this.setState({
+                        showCheckOutSnackbar: true,
+                        snackbarMessage: `Promo Code "${promoCode}" applied`
+                    });
+                }
+                else {
+                    this.setState({
+                        showCheckOutSnackbar: true,
+                        snackbarMessage: `Promo Code "${promoCode}" not found`
                     });
                 }
             }
@@ -60,8 +84,32 @@ class Checkout extends Component {
 
     disableAddFoodSnackbar() {
         this.setState({
-            isAddFoodSucceed: false
+            showCheckOutSnackbar: false
         });
+    }
+
+    getTotalPrice(foodList) {
+        return Object.keys(foodList).map(value => this.props.foods[value].price * foodList[value])
+        .reduce((a, b) => a + b, 0)
+    }
+
+    getDiscount(foodList) {
+        if (this.props.checkout.promoCode) {
+            let discount = Object.keys(foodList)
+            .map(value => this.props.foods[value].price * foodList[value])
+            .reduce((a, b) => a + b, 0) * this.props.promo[this.props.checkout.promoCode].discount / 100;
+
+            discount = Math.round(discount / 100) * 100;
+
+            if (discount > this.props.promo[this.props.checkout.promoCode].maximum) {
+                discount = this.props.promo[this.props.checkout.promoCode].maximum;
+            }
+
+            return discount;
+        }
+        else {
+            return 0;
+        }
     }
 
     render() {
@@ -138,22 +186,32 @@ class Checkout extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-                                <td>250</td>
-                                <td>1</td>
-                                <td>250</td>
-                            </tr>
+                            {
+                                Object.keys(this.props.checkout.foodList).map(value => {
+                                    return(
+                                        <tr>
+                                            <td class="mdl-data-table__cell--non-numeric">{value}</td>
+                                            <td>{this.props.foods[value].price}</td>
+                                            <td>{this.props.checkout.foodList[value]}</td>
+                                            <td>{this.props.foods[value].price * this.props.checkout.foodList[value]}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="3">Total Price</th>
-                                <td id="total-price-value">0</td>
+                                <td id="total-price-value">
+                                    { this.getTotalPrice(this.props.checkout.foodList) }
+                                </td>
                             </tr>
 
                             <tr>
-                                <th colspan="3">Discount <span id="promo-value"></span></th>
-                                <td id="discount-value">0</td>
+                                <th colspan="3">Discount <span id="promo-value">{ this.props.checkout.promoCode }</span></th>
+                                <td id="discount-value">
+                                    { this.getDiscount(this.props.checkout.foodList) }
+                                </td>
                             </tr>
 
                             <tr>
@@ -170,8 +228,8 @@ class Checkout extends Component {
                 </div>
 
                 <Snackbar
-                    active={this.state.showAddFoodSnackbar}
-                    onTimeout={() => this.disableAddFoodSnackbar()}>Add food succeeded</Snackbar>
+                    active={this.state.showCheckOutSnackbar}
+                    onTimeout={() => this.disableAddFoodSnackbar()}>{this.state.snackbarMessage}</Snackbar>
             </div>
         );
     }
