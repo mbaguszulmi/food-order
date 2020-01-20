@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return(
       <div className="App">
-        <Layout>
+        <Layout fixedHeader>
           <Nav />
           <Content>
             <div className="inner-content">
