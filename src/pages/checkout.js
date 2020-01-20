@@ -26,8 +26,11 @@ class Checkout extends Component {
         document.title = "Check Out";
 
         document.querySelector("#textfield-FoodName").addEventListener("input", event => {
-            let foodNameInput = event.target;
-            foodNameInput.value = foodNameInput.value.toUpperCase();
+            event.target.value = event.target.value.toUpperCase();
+        });
+
+        document.querySelector("#textfield-PromoCode").addEventListener("input", event => {
+            event.target.value = event.target.value.toUpperCase();
         });
 
         document.querySelector("#add-food-btn").addEventListener("click", () => {
