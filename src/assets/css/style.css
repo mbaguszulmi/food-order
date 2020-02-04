@@ -1,5 +1,5 @@
 @media (max-width: 699px) {
-  body nav.mdl-navigation {
+  body nav.mdl-navigation.top-nav {
     display: none;
   }
 }
@@ -13,5 +13,9 @@ body div.mdl-layout__content div.inner-content {
   max-width: 1200px;
   padding: 20px;
   margin: 0 auto;
+}
+
+body div.mdl-layout__content div.inner-content div.table-container {
+  overflow-x: auto;
 }
 /*# sourceMappingURL=style.css.map */
