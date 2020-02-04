@@ -13,8 +13,7 @@ diimplementasikan dikarenakan saya masih mempelajari berbagai macam hal di dalam
 5. Melakukan Checkout (halaman checkout)
 
 ### Task yang akan dilakukan
-1. Menjadikan responsive
-2. Menambah elemen footer
+1. Menambah elemen footer
 
 ## Install
 1. Install nodejs / yarn
