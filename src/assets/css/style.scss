@@ -3,7 +3,7 @@
 }
 
 body {
-    nav.mdl-navigation {
+    nav.mdl-navigation.top-nav {
         @include for-phone-only {
             display: none;
         }

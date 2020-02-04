@@ -1,5 +1,5 @@
 @media (max-width: 699px) {
-  body nav.mdl-navigation {
+  body nav.mdl-navigation.top-nav {
     display: none;
   }
 }

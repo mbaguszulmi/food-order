@@ -7,7 +7,7 @@ class Nav extends Component {
         return(
             <Layout fixedHeader>
                 <Header title="Food Order">
-                    <Navigation>
+                    <Navigation className="top-nav">
                         <Link to="/">Home</Link>
                         <Link to="/checkout">Checkout</Link>
                         <Link to="/add-food">Add Food</Link>
