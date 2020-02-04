@@ -14,4 +14,8 @@ body div.mdl-layout__content div.inner-content {
   padding: 20px;
   margin: 0 auto;
 }
+
+body div.mdl-layout__content div.inner-content div.table-container {
+  overflow-x: auto;
+}
 /*# sourceMappingURL=style.css.map */
